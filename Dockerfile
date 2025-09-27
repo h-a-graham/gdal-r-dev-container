@@ -54,8 +54,10 @@ RUN rm -rf /tmp/gdal
 
 # Install pak package from CRAN and gdalraster from GitHub
 RUN R -e "install.packages('pak', repos='https://cloud.r-project.org/')" && \
-  R -e "pak::pkg_install('devtools')" && \
-  R -e "pak::pkg_install('USDAForestService/gdalraster')" 
+  R -e "pak::pkg_install('devtools')"
+ENV PKG_SYSREQS FALSE
+RUN R -e "pak::pkg_install('USDAForestService/gdalraster')" 
+ENV PKG_SYSREQS TRUE
 
 
 
